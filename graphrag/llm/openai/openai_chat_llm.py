@@ -52,6 +52,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
+        args = {key: value for key, value in args.items() if value is not None}
         completion = await self.client.chat.completions.create(
             messages=messages, **args
         )
